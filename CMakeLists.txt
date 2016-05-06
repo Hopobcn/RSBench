@@ -11,6 +11,10 @@ option(PROFILE  "Compile for profiling" OFF)
 option(STATUS   "Compile with status"   ON)
 option(PAPI     "Compile with PAPI lib" OFF)
 
+if (DEBUG OR PROFILE)
+    set(OPTIMIZE OFF)
+endif (DEBUG OR PROFILE)
+
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_SOURCE_DIR}/cmake")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu99")
@@ -21,16 +25,12 @@ if (OPENMP_FOUND)
 endif(OPENMP_FOUND)
 
 if (OPTIMIZE)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Ofast")
-endif()
-
-if (DEBUG)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
-endif (DEBUG)
-
-if (PROFILE)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg")
-endif (PROFILE)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -march=native")
+elseif (DEBUG)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g")
+elseif (PROFILE)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g -pg")
+endif ()
 
 if (STATUS)
     add_definitions(-DSTATUS)
