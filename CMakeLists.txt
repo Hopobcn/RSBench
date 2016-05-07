@@ -11,6 +11,10 @@ option(PROFILE  "Compile for profiling" OFF)
 option(STATUS   "Compile with status"   ON)
 option(PAPI     "Compile with PAPI lib" OFF)
 
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set(DEBUG ON)
+endif()
+
 if (DEBUG OR PROFILE)
     set(OPTIMIZE OFF)
 endif (DEBUG OR PROFILE)
