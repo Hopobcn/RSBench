@@ -73,6 +73,7 @@ int * generate_n_windows( Input input );
 Pole ** generate_poles( Input input, int * n_poles );
 Window ** generate_window_params( Input input, int * n_windows, int * n_poles );
 double ** generate_pseudo_K0RS( Input input );
+void free_data( CalcDataPtrs );
 
 // material.c
 int * load_num_nucs(Input input);

@@ -157,7 +157,9 @@ int main(int argc, char * argv[])
 			#pragma omp barrier
 		}
 		counter_stop(&eventset, num_papi_events);
-		#endif
+        #endif
+
+		free(xs);
 	}
 
 	stop = omp_get_wtime();
@@ -179,6 +181,7 @@ int main(int argc, char * argv[])
 	printf("Lookups/s:     "); fancy_int((double) input.lookups / (stop-start));
 
 	border_print();
+    free_data(data);
 
 	return 0;
 }

@@ -137,3 +137,18 @@ double ** generate_pseudo_K0RS( Input input )
 
 	return R;
 }
+
+void free_data( CalcDataPtrs data )
+{
+    free(data.n_poles);
+    free(data.n_windows);
+
+    free(data.poles[0]);
+    free(data.poles);
+
+    free(data.windows[0]);
+    free(data.windows);
+
+    free(data.pseudo_K0RS[0]);
+    free(data.pseudo_K0RS);
+}
